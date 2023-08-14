@@ -1,0 +1,76 @@
+  .navbar {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    background-color: #AF2C2C;
+    height: 35px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap; 
+    position: relative;    
+    padding: 0 30px;
+  }
+  .navbar::-webkit-scrollbar, .options::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .navbar:hover .arrowButton {
+    opacity: 1;
+  }
+  .options {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+ 
+  
+  .button {
+    border: none;
+    background-color: transparent;
+    color: white;
+    height: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0 15px;
+  }
+  
+  .button:hover {
+    font-size: 0.9rem;
+    background-color: #9d1212;
+    text-decoration: underline solid white 2px;
+    text-underline-offset: 8px;
+  }
+  
+  .arrowButton {
+    position: absolute;
+    top: 0;
+    width: 30px;
+    height: 35px;
+    background-color:black ;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0; 
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .arrowButton:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .left {
+    left: 0;
+  }
+  
+ .right {
+    right: 0;
+  }
+  
