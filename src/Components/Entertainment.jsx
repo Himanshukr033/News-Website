@@ -36,6 +36,7 @@ const Entertainment = () => {
   return (
     <>
       <div className={styles.blogGrid}>
+        
         {blogs.map((item) => (
           <div key={item.keyId} className={styles.blogContainer}>
             <img

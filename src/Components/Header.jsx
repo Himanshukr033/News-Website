@@ -5,7 +5,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import styles from "./header.module.css"
 
 const key = import.meta.env.VITE_Weather_key2;
-const url = `http://api.weatherapi.com/v1/current.json?key=${key}&q=Patna&aqi=yes`;
+const url = `https://api.weatherapi.com/v1/current.json?key=${key}&q=Patna&aqi=yes`;
 
 const Header = () => {
   const [temp, setTemp] = useState({});

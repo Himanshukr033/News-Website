@@ -66,7 +66,10 @@ const LatestNews = () => {
             </div>
           ))}
         </div>
-        <Entertainment />
+        <div>
+          <h4 style={{textAlign: "center"}}> Entertainment News</h4>
+          <Entertainment />
+        </div>
       </div>
     </>
   );
