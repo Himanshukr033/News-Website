@@ -33,20 +33,21 @@ const LatestNews = () => {
       
     };
     const secondPage = async () => {
-      try {
-        const response = await axios.get(`https://newsdata.io/api/1/news?&q=${search}&language=en&country=in
-        &prioritydomain=medium&size=10&image=1&apikey=${api}&page=${nxtPage}`);
-        console.log(response);
-        
-        const nextPageResults = response.data.results.map((items) => ({
-        ...items,
-        keyId: `${items.source_id} ${items.title}`,
-      }));
-      setBlogs((prevBlogs) => [...prevBlogs, ...nextPageResults]);
-      } catch (error)  {
-          console.error('Batch request error:', error);
-        }
-      
+      if (nxtPage) {
+        try {
+          const response = await axios.get(`https://newsdata.io/api/1/news?&q=${search}&language=en&country=in
+          &prioritydomain=medium&size=10&image=1&apikey=${api}&page=${nxtPage}`);
+          console.log(response);
+          
+          const nextPageResults = response.data.results.map((items) => ({
+          ...items,
+          keyId: `${items.source_id} ${items.title}`,
+        }));
+        setBlogs((prevBlogs) => [...prevBlogs, ...nextPageResults]);
+        } catch (error)  {
+            console.error('Batch request error:', error);
+          }
+      }
     };
 
     makeRequest();
