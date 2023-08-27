@@ -6,8 +6,6 @@ const api = import.meta.env.VITE_NEWSKEY;
 
 const Entertainment = () => {
   const [blogs, setBlogs] = useState([]);
-  const search1 ="Spicy";
-  const search = "netflix, bollywood"
 
 
 
@@ -17,7 +15,7 @@ const Entertainment = () => {
 
   const blogHandler = async () => {
     try {
-      const baseUrl = `https://newsapi.org/v2/everything?q=${search}&sortBy=publishedAt&pageSize=10&apiKey=${api}`;
+      const baseUrl = `https://newsapi.org/v2/everything?q=bollywood&sortBy=popularity&pageSize=10&apiKey=${api}`;
       const response = await axios.get(baseUrl);
 
       const results = response.data.articles.map((items) => ({
