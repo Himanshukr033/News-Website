@@ -16,7 +16,10 @@
     height: 8svh;
     box-shadow: 0px 1px 0px  rgba(0, 0, 0, 0.4);
   }
-  
+  .blogContainer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
   .blogImage {
     width: 80px;
     height: 60px;
@@ -45,3 +48,28 @@
     text-decoration: underline;
   }
   
+  @media (max-width: 768px) {
+    
+    .blogGrid {
+      width: 90%;      
+      height: 50vh;
+      overflow: auto;
+    }
+  
+    .blogContainer {
+      height: auto; 
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .blogImage {
+      width: 18%;
+      height: auto;
+      margin-right: 0;
+      border-radius: 0;
+      margin-right: 10px;
+    }
+  
+    .blogContent {
+      margin: 10px 0; 
+    }
+  }

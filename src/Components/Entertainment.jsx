@@ -7,44 +7,41 @@ const api = import.meta.env.VITE_NEWSKEY;
 const Entertainment = () => {
   const [blogs, setBlogs] = useState([]);
 
-
-
   useEffect(() => {
-    blogHandler();
-  }, []);
-
-  const blogHandler = async () => {
-    try {
-      const baseUrl = `https://newsapi.org/v2/everything?q=bollywood&sortBy=popularity&pageSize=10&apiKey=${api}`;
-      const response = await axios.get(baseUrl);
-
-      const results = response.data.articles.map((items) => ({
+    const makeRequest = async () => {
+      try {
+        const response = await axios.get(`https://newsdata.io/api/1/news?category=entertainment&q=Bollywood OR Netflix OR Movies&language=en&country=in&prioritydomain=medium&image=1&apikey=${api}`);
+        console.log(response.data.results);
+        const results = response.data.results.map((items) => ({
         ...items,
-        keyId: `${items.source.id} ${items.source.name}`,
+        keyId: `${items.source_id} ${items.title}`,
       }));
 
       setBlogs(results);
+      } catch (error)  {
+          console.error('Batch request error:', error);
+        }
+      
+    };
 
-      console.log(blogs);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    makeRequest();
+  }, []);
+  
   return (
     <>
       <div className={styles.blogGrid}>
         
         {blogs.map((item) => (
-          <div key={item.keyId} className={styles.blogContainer}>
+          <div key={item.keyId} className={styles.blogContainer}> 
             <img
-              src={item.urlToImage}
+              src={item?.image_url || 'https://i.ytimg.com/vi/gtYeZud4EHI/maxresdefault.jpg'}
               alt="blog Image"
               className={styles.blogImage}
             />
             <div className={styles.blogContent}>
               <h6 className={styles.blogTitle}>
                 <a
-                  href={item.url}
+                  href={item.link}
                   target="_blank"
                   rel="noreferrer"
                   className={styles.blogLink}

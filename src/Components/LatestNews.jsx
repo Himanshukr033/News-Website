@@ -4,39 +4,55 @@ import Navbar from "./Navbar";
 import styles from "./LatestNews.module.css";
 import Entertainment from "./Entertainment";
 
-const api = import.meta.env.VITE_NEWSKEY2;
+const api = import.meta.env.VITE_NEWSKEY;
 
 const LatestNews = () => {
   const [blogs, setBlogs] = useState([]);
   const [search, setSearch] = useState("India");
+  const [nxtPage, setNextPage] = useState();
 
   const handleOptionClick = (option) => {
     setSearch(option);
     console.log(option);
   };
-
   useEffect(() => {
-    blogHandler();
-  }, [search]);
-
-  const blogHandler = async () => {
-    try {
-      const baseUrl = `https://newsapi.org/v2/everything?q=${search}&sortBy=publishedAt&pageSize=20&apiKey=${api}`;
-
-      const response = await axios.get(baseUrl);
-
-      const results = response.data.articles.map((items) => ({
+    const makeRequest = async () => {
+      try {
+        const response = await axios.get(`https://newsdata.io/api/1/news?&q=${search}&language=en&country=in&prioritydomain=medium&size=10&image=1&apikey=${api}`);
+        console.log(response);
+        setNextPage(response.data.nextPage);
+        const results = response.data.results.map((items) => ({
         ...items,
-        keyId: `${items.source.id} ${items.source.name}`,
+        keyId: `${items.source_id} ${items.title}`,
       }));
 
       setBlogs(results);
+      } catch (error)  {
+          console.error('Batch request error:', error);
+        }
+      
+    };
+    const secondPage = async () => {
+      try {
+        const response = await axios.get(`https://newsdata.io/api/1/news?&q=${search}&language=en&country=in
+        &prioritydomain=medium&size=10&image=1&apikey=${api}&page=${nxtPage}`);
+        console.log(response);
+        
+        const nextPageResults = response.data.results.map((items) => ({
+        ...items,
+        keyId: `${items.source_id} ${items.title}`,
+      }));
+      setBlogs((prevBlogs) => [...prevBlogs, ...nextPageResults]);
+      } catch (error)  {
+          console.error('Batch request error:', error);
+        }
+      
+    };
 
-      console.log(blogs);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    makeRequest();
+    secondPage();
+  }, [search,nxtPage]);
+  
   return (
     <>
       <div>
@@ -45,16 +61,16 @@ const LatestNews = () => {
       <div className={styles.news}>
         <div className={styles.blogGrid}>
           {blogs.map((item) => (
-            <div key={item.keyId} className={styles.blogContainer}>
+            <div key={`${item.keyId}${item.title}`} className={styles.blogContainer}>
               <img
-                src={item.urlToImage}
+                src={item?.image_url || 'https://i.ytimg.com/vi/gtYeZud4EHI/maxresdefault.jpg'}
                 alt="blog Image"
                 className={styles.blogImage}
               />
               <div className={styles.blogContent}>
                 <h6 className={styles.blogTitle}>
                   <a
-                    href={item.url}
+                    href={item.link}
                     target="_blank"
                     rel="noreferrer"
                     className={styles.blogLink}
@@ -71,6 +87,7 @@ const LatestNews = () => {
           <Entertainment />
         </div>
       </div>
+      
     </>
   );
 };
