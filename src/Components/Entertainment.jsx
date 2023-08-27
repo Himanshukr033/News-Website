@@ -18,7 +18,6 @@ const Entertainment = () => {
   const blogHandler = async () => {
     try {
       const baseUrl = `https://newsapi.org/v2/everything?q=${search}&sortBy=publishedAt&pageSize=10&apiKey=${api}`;
-      console.log(api);
       const response = await axios.get(baseUrl);
 
       const results = response.data.articles.map((items) => ({
