@@ -25,7 +25,7 @@ Welcome to NewsWebsite, a responsive and mobile-friendly news website that provi
 
 ## Screenshots
 
-![Screenshot of the News Website] (https://github.com/Himanshukr033/News-Website/assets/97483100/e79cc799-d5a3-4295-bf02-03df9aa1a61c)
+![Screenshot of the News Website](https://github.com/Himanshukr033/News-Website/assets/97483100/e79cc799-d5a3-4295-bf02-03df9aa1a61c)
 
 
 ## Getting Started
