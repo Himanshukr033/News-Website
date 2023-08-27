@@ -60,7 +60,7 @@ const Header = () => {
   return (
     <>
     <div className={styles.header}>
-      <h6> {time}  </h6>
+      <h6 className={styles.time}> {time}  </h6>
       <div className={styles.weather}>
         <LocationOnIcon style={{ fontSize: "17px" }}/>
         <h6> {temp.place}</h6>
